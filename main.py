@@ -2,6 +2,7 @@ import requests
 import json
 import sys
 import time
+import subprocess
 
 from DFRobot_MAX17043 import DFRobot_MAX17043
 import RPi.GPIO as GPIO
@@ -46,7 +47,7 @@ while True:
   voltage = f'votlage_{iteration}'
   percent = f'percent_{iteration}' 
     
-    
+  time.sleep(2)
   print('voltage: ' + str(gauge.read_voltage()) + 'mV')
   print('percentage: ' + str(round(gauge.read_percentage(), 2)) + '%')
   
@@ -75,6 +76,7 @@ while True:
   try:
     response.raise_for_status()
     print(json.dumps(response.json()))
+    subprocess.run(["mpg321", "Maximum.amr"])
   except requests.exceptions.HTTPError as err:
     print(err)
     
