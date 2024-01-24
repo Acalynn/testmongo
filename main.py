@@ -46,7 +46,7 @@ while True:
 
   voltage = f'votlage_{iteration}'
   percent = f'percent_{iteration}' 
-    
+  measurement =f'measurement_{iteration}' 
   time.sleep(2)
   print('voltage: ' + str(gauge.read_voltage()) + 'mV')
   print('percentage: ' + str(round(gauge.read_percentage(), 2)) + '%')
@@ -61,12 +61,9 @@ while True:
     },
     "update":{
         "$set":{
-            "voltage":{
-                       "voltage": gauge.read_voltage()
-            },
-            "percent":{
-                       "percent": round(gauge.read_percentage(), 2)
-            },
+           measurement : {
+             str(gauge.read_voltage()) : str(round(gauge.read_percentage(), 2))
+           }
             }
         },
     }  
